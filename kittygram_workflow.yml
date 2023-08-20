@@ -12,6 +12,9 @@ jobs:
       postgres:
         image: postgres:13.10
         env:
+          # Андрей не поняла, зачем убирать тестовую базу в сикреты,
+          # если она существует только для задачи тесты и удаляется?
+          # У нас в теории написали, что тут оставляем, это неудачный совет?
           POSTGRES_USER: django_user
           POSTGRES_PASSWORD: django_password
           POSTGRES_DB: django_db

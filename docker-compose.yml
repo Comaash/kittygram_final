@@ -14,9 +14,11 @@ services:
   backend:
     image: comaash/kittygram_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static:/backend_static
-      - media:/media
+      - media:/app/media
   frontend:
     env_file: .env
     image: comaash/kittygram_frontend
@@ -26,8 +28,12 @@ services:
   gateway:
     image: comaash/kittygram_gateway
     env_file: .env
+    depends_on:
+      - db
+      - backend
+      - frontend
     ports:
       - 9000:80
     volumes:
       - static:/staticfiles
-      - media:/media
+      - media:/app/media
